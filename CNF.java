@@ -24,34 +24,10 @@ class PropositionalTree {
 
     public void insert(int data, Stack<Node> stack) {
         Node current = root;
-        Node parent = null;
-        boolean isLeftChild = false;
-
-        while (current != null) {
-            parent = current;
-            if (data < current.data) {
-                current = current.left;
-                isLeftChild = true;
-            } else if (data > current.data) {
-                current = current.right;
-                isLeftChild = false;
-            } else {
-                // Data already exists in the tree
-                return;
-            }
-        }
-
-        // Create a new node with the given data
         Node newNode = new Node(data);
+        
 
-        // Update the parent pointer
-        if (parent == null) {
-            root = newNode;
-        } else if (isLeftChild) {
-            parent.left = newNode;
-        } else {
-            parent.right = newNode;
-        }
+        
 
         // Push the new node onto the stack
         stack.push(newNode);
