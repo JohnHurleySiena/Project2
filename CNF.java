@@ -1,13 +1,14 @@
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.BufferedReader;
 import java.util.Stack;
 
 class Node {
-    int data;
+    char data;
     Node left, right;
 
-    public Node(int data) {
+    public Node(char data) {
         this.data = data;
         left = right = null;
     }
@@ -22,7 +23,7 @@ class PropositionalTree {
         size = 0;
     }
 
-    public void insert(int data, Stack<Node> stack) {
+    public void insert(char data, Stack<Node> stack) {
         Node current = root;
         Node newNode = new Node(data);
         
@@ -46,19 +47,29 @@ class PropositionalTree {
     }
 
     public void readPropositionsFromFile(String fileName) throws FileNotFoundException {
-        File file = new File(fileName);
-        Scanner scanner = new Scanner(file);
-        Stack<Node> stack = new Stack<Node>();
+        String file = "C:\\Users\\johnh\\Desktop\\list.txt";
+        
+        Stack<Character> charStack = new Stack<>();
+        
 
-        while (scanner.hasNextLine()) {
-            int data = Integer.parseInt(scanner.nextLine());
-            insert(data, stack);
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line = reader.readLine();
+            while (line != null) {
+                for (int i = 0; i < line.length(); i++) {
+
+                    // Need to check here if ( or ) then we don't add to the stack
+
+
+                    charStack.push(line.charAt(i));
+                }
+                line = reader.readLine();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-        scanner.close();
-
         // Print the stack
-        System.out.println("Variables in the stack: " + stack);
+        System.out.println("Variables in the stack: " + charStack);
     }
 
     public static void main(String[] args) {
@@ -77,6 +88,6 @@ class PropositionalTree {
         System.out.println("\nTotal number of nodes in propositional tree is: " + tree.size);
 
         // (P biconditional Q) needs to be turned into ((P > Q) & (Q > P))
-        
+
     }
 }
