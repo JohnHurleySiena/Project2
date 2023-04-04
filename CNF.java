@@ -75,5 +75,8 @@ class PropositionalTree {
         System.out.println("Inorder traversal of propositional tree is: ");
         tree.printInorder(tree.root);
         System.out.println("\nTotal number of nodes in propositional tree is: " + tree.size);
+
+        // (P biconditional Q) needs to be turned into ((P > Q) & (Q > P))
+        
     }
 }
