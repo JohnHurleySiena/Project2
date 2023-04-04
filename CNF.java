@@ -37,16 +37,9 @@ class PropositionalTree {
         size++;
     }
 
-    public void printInorder(Node Node) {
-        if (Node == null)
-            return;
 
-        printInorder(Node.left);
-        System.out.print(Node.data + " ");
-        printInorder(Node.right);
-    }
 
-    public void readPropositionsFromFile(String fileName) throws FileNotFoundException {
+    public void readPropositionsFromFile() throws FileNotFoundException {
         String file = "C:\\Users\\johnh\\Desktop\\list.txt";
         
         Stack<Character> charStack = new Stack<>();
@@ -57,10 +50,12 @@ class PropositionalTree {
             while (line != null) {
                 for (int i = 0; i < line.length(); i++) {
 
-                    // Need to check here if ( or ) then we don't add to the stack
+                    // Need to check here if ( or ) or ' ' then we don't add to the stack
+                    char temp = line.charAt(i);
+                    if( temp != '(' & temp != ')' & temp != ' '){
+                    charStack.push(temp);
+                    }
 
-
-                    charStack.push(line.charAt(i));
                 }
                 line = reader.readLine();
             }
@@ -72,19 +67,21 @@ class PropositionalTree {
         System.out.println("Variables in the stack: " + charStack);
     }
 
+
+
+
+
     public static void main(String[] args) {
         PropositionalTree tree = new PropositionalTree();
-        String fileName = "C:\\Users\\johnh\\Desktop\\list.txt";
 
         try {
-            tree.readPropositionsFromFile(fileName);
+            tree.readPropositionsFromFile();
         } catch (FileNotFoundException e) {
             System.out.println("File not found.");
             return;
         }
 
-        System.out.println("Inorder traversal of propositional tree is: ");
-        tree.printInorder(tree.root);
+
         System.out.println("\nTotal number of nodes in propositional tree is: " + tree.size);
 
         // (P biconditional Q) needs to be turned into ((P > Q) & (Q > P))
