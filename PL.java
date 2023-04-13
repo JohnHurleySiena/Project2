@@ -65,6 +65,7 @@ C:\\Users\\johnh\\Desktop\\logic_test_cases\\easy1_CNF.txt
          // Here's where the PL Resolution happens
          ArrayList<String> firstCompare = null;
          ArrayList<String> secondCompare = null;
+         boolean cancelled = false;
 
          for(int i = 0; i < inputList.size(); i++){ // Getting first list
             firstCompare = inputList.get(i);
@@ -82,6 +83,7 @@ C:\\Users\\johnh\\Desktop\\logic_test_cases\\easy1_CNF.txt
                     if(firstCompare.get(k).length() == 2){ // This will check if the variable is negated
                         if(firstCompare.get(k).substring(1).equals(secondCompare.get(o)) & secondCompare.get(o).length() == 1 ){
                             System.out.println("Cancelling: " + firstCompare.get(k) + " " + secondCompare.get(o));
+                            cancelled = true;
                             //Checks if first is negative then checks is second is postive
                             // Need to dupe the array and delete letters.
                         }
@@ -92,11 +94,17 @@ C:\\Users\\johnh\\Desktop\\logic_test_cases\\easy1_CNF.txt
                             // Checks if first is positive then checks if second is negative
                             // Needs to dupe the array and delete letters.
                             System.out.println("Cancelling: " + firstCompare.get(k) + " " + secondCompare.get(o));
+                            cancelled = true;
                         }
 
                     }
 
+                    if(cancelled){ // If there is a variable that is cancelled then we need to add a new list to our output.
+
+                    }
+
                 }
+
 
 
             }
