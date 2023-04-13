@@ -24,38 +24,52 @@
 4-14, produces 19: ~Z,a
 4-16, produces: ~Z
 
+
+C:\\Users\\johnh\\Desktop\\logic_test_cases\\easy1_CNF.txt
  */
 
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.io.File;
-import java.io.FileNotFoundException;
+ import java.util.ArrayList; // Import the ArrayList class
+ import java.util.Scanner; // Import the Scanner class for reading input
+ import java.io.File; // Import the File class for reading files
+ import java.io.FileNotFoundException; // Import the FileNotFoundException class for handling file not found errors
+ 
+ public class PL {
+     public static void main(String[] args) {
+         ArrayList<ArrayList<String>> inputList = new ArrayList<ArrayList<String>>(); // Create a new ArrayList of ArrayLists to store the input
+         try {
+             File inputFile = new File("C:\\Users\\johnh\\Desktop\\logic_test_cases\\easy1_CNF.txt"); // Create a new File object representing the input file
 
-public class PL {
-    public static void main(String[] args) {
-        ArrayList<ArrayList<String>> inputList = new ArrayList<ArrayList<String>>();
-        try {
-            File inputFile = new File("C:\\Users\\johnh\\Desktop\\logic_test_cases\\easy1_CNF.txt"); // Replace with the name of your input file
-            Scanner scanner = new Scanner(inputFile);
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                ArrayList<String> lineList = new ArrayList<String>();
-                for (String s : line.split(",")) {
-                    lineList.add(s.trim());
-                }
-                inputList.add(lineList);
-            }
-            scanner.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("Error: Input file not found.");
-            return;
-        }
-        // Print out the contents of the inputList ArrayList of ArrayLists
-        for (ArrayList<String> lineList : inputList) {
-            for (String s : lineList) {
-                System.out.print(s + " ");
-            }
-            System.out.println();
-        }
-    }
-}
+             Scanner scanner = new Scanner(inputFile); // Create a new Scanner object for reading input from the input file
+
+
+             while (scanner.hasNextLine()) { // Loop through each line in the input file
+                 String line = scanner.nextLine(); // Read the next line of input
+                 ArrayList<String> lineList = new ArrayList<String>(); // Create a new ArrayList to store the substrings in this line
+                 
+                 for (String s : line.split(",")) { // Split the line by the ',' character and loop through each resulting substring
+                     lineList.add(s.trim()); // Add the trimmed substring to the ArrayList
+                 }
+                 inputList.add(lineList); // Add the ArrayList of substrings to the inputList ArrayList of ArrayLists
+             }
+             scanner.close(); // Close the Scanner object to free up system resources
+
+
+
+         } catch (FileNotFoundException e) { // Handle the FileNotFoundException that may be thrown if the input file is not found
+             System.out.println("Error: Input file not found."); // Print an error message
+             return; // End the program
+         }
+
+
+
+
+         // Print out the contents of the inputList ArrayList of ArrayLists
+         for (ArrayList<String> lineList : inputList) { // Loop through each ArrayList in the inputList ArrayList of ArrayLists
+             for (String s : lineList) { // Loop through each String in the current ArrayList
+                 System.out.print(s + " "); // Print the current String followed by a space
+             }
+             System.out.println(); // Print a newline character to separate the lines
+         }
+     }
+ }
+ 
