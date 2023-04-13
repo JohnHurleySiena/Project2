@@ -81,7 +81,7 @@ C:\\Users\\johnh\\Desktop\\logic_test_cases\\easy1_CNF.txt
 
                     if(firstCompare.get(k).length() == 2){ // This will check if the variable is negated
                         if(firstCompare.get(k).substring(1).equals(secondCompare.get(o)) & secondCompare.get(o).length() == 1 ){
-                            System.out.println("Winner! " + firstCompare.get(k) + " " + secondCompare.get(o));
+                            System.out.println("Cancelling: " + firstCompare.get(k) + " " + secondCompare.get(o));
                             //Checks if first is negative then checks is second is postive
                             // Need to dupe the array and delete letters.
                         }
@@ -91,7 +91,7 @@ C:\\Users\\johnh\\Desktop\\logic_test_cases\\easy1_CNF.txt
                         if(("~" + firstCompare.get(k)).equals(secondCompare.get(o))){
                             // Checks if first is positive then checks if second is negative
                             // Needs to dupe the array and delete letters.
-                            System.out.println("Winner! " + firstCompare.get(k) + " " + secondCompare.get(o));
+                            System.out.println("Cancelling: " + firstCompare.get(k) + " " + secondCompare.get(o));
                         }
 
                     }
