@@ -36,6 +36,9 @@ C:\\Users\\johnh\\Desktop\\logic_test_cases\\easy1_CNF.txt
  public class PL {
      public static void main(String[] args) {
          ArrayList<ArrayList<String>> inputList = new ArrayList<ArrayList<String>>(); // Create a new ArrayList of ArrayLists to store the input
+         ArrayList<ArrayList<String>> outputList = new ArrayList<ArrayList<String>>();
+
+
          try {
              File inputFile = new File("C:\\Users\\johnh\\Desktop\\logic_test_cases\\easy1_CNF.txt"); // Create a new File object representing the input file
 
@@ -45,19 +48,63 @@ C:\\Users\\johnh\\Desktop\\logic_test_cases\\easy1_CNF.txt
              while (scanner.hasNextLine()) { // Loop through each line in the input file
                  String line = scanner.nextLine(); // Read the next line of input
                  ArrayList<String> lineList = new ArrayList<String>(); // Create a new ArrayList to store the substrings in this line
-                 
+
                  for (String s : line.split(",")) { // Split the line by the ',' character and loop through each resulting substring
                      lineList.add(s.trim()); // Add the trimmed substring to the ArrayList
                  }
                  inputList.add(lineList); // Add the ArrayList of substrings to the inputList ArrayList of ArrayLists
              }
              scanner.close(); // Close the Scanner object to free up system resources
-
-
-
          } catch (FileNotFoundException e) { // Handle the FileNotFoundException that may be thrown if the input file is not found
              System.out.println("Error: Input file not found."); // Print an error message
              return; // End the program
+         }
+
+
+
+         // Here's where the PL Resolution happens
+         ArrayList<String> firstCompare = null;
+         ArrayList<String> secondCompare = null;
+
+         for(int i = 0; i < inputList.size(); i++){ // Getting first list
+            firstCompare = inputList.get(i);
+            for(int j = 0; j < inputList.size(); j++){ //  Getting second list
+                secondCompare = inputList.get(j);
+
+                for(int k = 0; k < firstCompare.size();k++){ // To loop through the characters in first list
+
+
+                    for(int o = 0; o < secondCompare.size();o++){ //  To loop through the characters in second list
+
+                if(secondCompare.contains(firstCompare.get(k)) | secondCompare.contains("~" + firstCompare.get(k))){
+                    //System.out.println("We contain" + firstCompare.get(k));
+
+                    if(firstCompare.get(k).length() == 2){ // This will check if the variable is negated
+                        if(firstCompare.get(k).substring(1).equals(secondCompare.get(o)) & secondCompare.get(o).length() == 1 ){
+                            System.out.println("Winner! " + firstCompare.get(k) + " " + secondCompare.get(o));
+                            //Checks if first is negative then checks is second is postive
+                            // Need to dupe the array and delete letters.
+                        }
+
+
+                    }else if(firstCompare.get(k).length() == 1){ // This will check if the variable is regular
+                        if(("~" + firstCompare.get(k)).equals(secondCompare.get(o))){
+                            // Checks if first is positive then checks if second is negative
+                            // Needs to dupe the array and delete letters.
+                            System.out.println("Winner! " + firstCompare.get(k) + " " + secondCompare.get(o));
+                        }
+
+                    }
+
+                }
+
+
+            }
+            }
+
+            }
+
+
          }
 
 
@@ -70,6 +117,14 @@ C:\\Users\\johnh\\Desktop\\logic_test_cases\\easy1_CNF.txt
              }
              System.out.println(); // Print a newline character to separate the lines
          }
+         for (ArrayList<String> lineList : outputList) { // Loop through each ArrayList in the inputList ArrayList of ArrayLists
+            for (String s : lineList) { // Loop through each String in the current ArrayList
+                System.out.print(s + " "); // Print the current String followed by a space
+            }
+            System.out.println(); // Print a newline character to separate the lines
+        }
+
      }
+
  }
  
