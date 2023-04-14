@@ -72,7 +72,7 @@ import java.io.IOException;
          ArrayList<String> secondCompare = null;
          ArrayList<String> temp = null;
          boolean cancelled = false;
-         int cancelCount = 0;
+         
 
          for(int i = 0; i < inputList.size(); i++){ // Getting first list
             firstCompare = inputList.get(i);
@@ -90,14 +90,14 @@ import java.io.IOException;
                     if(firstCompare.get(k).length() == 2){ // This will check if the variable is negated
                         if(firstCompare.get(k).substring(1).equals(secondCompare.get(o)) & secondCompare.get(o).length() == 1 ){
                             cancelled = true;
-                            cancelCount++;
+                            
                         }
 
 
                     }else if(firstCompare.get(k).length() == 1){ // This will check if the variable is regular
                         if(("~" + firstCompare.get(k)).equals(secondCompare.get(o))){
                             cancelled = true;
-                            cancelCount++;
+                            
                         }
 
                     }
