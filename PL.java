@@ -147,7 +147,7 @@ import java.io.IOException;
         // Each element of the sublist is written to the file followed by a space character.
         for (ArrayList<String> sublist : outputList) {
             for (String str : sublist) {
-                writer.write(str + ", ");
+                writer.write(str + " ");
             }
             writer.write(System.lineSeparator());
         }
