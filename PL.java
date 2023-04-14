@@ -46,7 +46,7 @@ import java.io.IOException;
 
 
          try {
-             File inputFile = new File("C:\\Users\\John H\\Desktop\\logic_test_cases\\easy1_CNF.txt"); // Create a new File object representing the input file
+             File inputFile = new File("C:\\Users\\John H\\Desktop\\logic_test_cases\\trivial1_CNF.txt"); // Create a new File object representing the input file
 
              Scanner scanner = new Scanner(inputFile); // Create a new Scanner object for reading input from the input file
 
@@ -89,18 +89,12 @@ import java.io.IOException;
 
                     if(firstCompare.get(k).length() == 2){ // This will check if the variable is negated
                         if(firstCompare.get(k).substring(1).equals(secondCompare.get(o)) & secondCompare.get(o).length() == 1 ){
-                            System.out.println("Cancelling: " + firstCompare.get(k) + " " + secondCompare.get(o));
                             cancelled = true;
-                            //Checks if first is negative then checks is second is postive
-                            // Need to dupe the array and delete letters.
                         }
 
 
                     }else if(firstCompare.get(k).length() == 1){ // This will check if the variable is regular
                         if(("~" + firstCompare.get(k)).equals(secondCompare.get(o))){
-                            // Checks if first is positive then checks if second is negative
-                            // Needs to dupe the array and delete letters.
-                            System.out.println("Cancelling: " + firstCompare.get(k) + " " + secondCompare.get(o));
                             cancelled = true;
                         }
 
@@ -130,6 +124,9 @@ import java.io.IOException;
             }
 
 
+         }
+         if(outputList.size() == 0){
+            outputList = new ArrayList<>(inputList);
          }
          
          Collections.sort(outputList, new Comparator<ArrayList<String>>() {
