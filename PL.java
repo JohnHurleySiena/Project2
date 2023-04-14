@@ -1,30 +1,4 @@
 /*
- * 1: ~Z,a,b,c,d
-2: ~a
-3: ~b
-4: ~c
-5: ~d
- 
-1-2, produces 6: ~Z,b,c,d
-1-3, produces 7: ~Z,a,c,d
-1-4, produces 8: ~Z,a,b,d
-1-5, produces 9: ~Z,a,b,c
-
-2-7, produces 10: ~Z,c,d
-2-8, produces 11: ~Z,b,d
-2-9, produces 12: ~Z,b,c
-
-3-8, produces 13: ~Z,a,d
-3-9, produces 14: ~Z,a,c
-3-11, produces 15: ~Z,d
-3-12, produces 16: ~Z,c
-
-4-9, produces 17: ~Z,a,b
-4-12, produces 18: ~Z,b
-4-14, produces 19: ~Z,a
-4-16, produces: ~Z
-
-
 C:\\Users\\johnh\\Desktop\\logic_test_cases\\easy1_CNF.txt
 C:\\Users\\John H\\Desktop\\easy1_CNF.txt
  */
