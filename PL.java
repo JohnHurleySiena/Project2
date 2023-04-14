@@ -32,7 +32,6 @@ C:\\Users\\John H\\Desktop\\easy1_CNF.txt
  import java.util.ArrayList; // Import the ArrayList class
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Scanner; // Import the Scanner class for reading input
  import java.io.File; // Import the File class for reading files
  import java.io.FileNotFoundException; // Import the FileNotFoundException class for handling file not found errors
@@ -46,7 +45,7 @@ import java.io.IOException;
 
 
          try {
-             File inputFile = new File("C:\\Users\\John H\\Desktop\\logic_test_cases\\trivial1_CNF.txt"); // Create a new File object representing the input file
+             File inputFile = new File("C:\\Users\\John H\\Desktop\\logic_test_cases\\hard1_CNF.txt"); // Create a new File object representing the input file
 
              Scanner scanner = new Scanner(inputFile); // Create a new Scanner object for reading input from the input file
 
@@ -73,6 +72,7 @@ import java.io.IOException;
          ArrayList<String> secondCompare = null;
          ArrayList<String> temp = null;
          boolean cancelled = false;
+         int cancelCount = 0;
 
          for(int i = 0; i < inputList.size(); i++){ // Getting first list
             firstCompare = inputList.get(i);
@@ -90,12 +90,14 @@ import java.io.IOException;
                     if(firstCompare.get(k).length() == 2){ // This will check if the variable is negated
                         if(firstCompare.get(k).substring(1).equals(secondCompare.get(o)) & secondCompare.get(o).length() == 1 ){
                             cancelled = true;
+                            cancelCount++;
                         }
 
 
                     }else if(firstCompare.get(k).length() == 1){ // This will check if the variable is regular
                         if(("~" + firstCompare.get(k)).equals(secondCompare.get(o))){
                             cancelled = true;
+                            cancelCount++;
                         }
 
                     }
@@ -125,6 +127,7 @@ import java.io.IOException;
 
 
          }
+         
          if(outputList.size() == 0){
             outputList = new ArrayList<>(inputList);
          }
