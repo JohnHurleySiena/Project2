@@ -26,21 +26,27 @@
 
 
 C:\\Users\\johnh\\Desktop\\logic_test_cases\\easy1_CNF.txt
+C:\\Users\\John H\\Desktop\\easy1_CNF.txt
  */
 
  import java.util.ArrayList; // Import the ArrayList class
- import java.util.Scanner; // Import the Scanner class for reading input
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Scanner; // Import the Scanner class for reading input
  import java.io.File; // Import the File class for reading files
  import java.io.FileNotFoundException; // Import the FileNotFoundException class for handling file not found errors
+import java.io.FileWriter;
+import java.io.IOException;
  
  public class PL {
-     public static void main(String[] args) {
+     public static void main(String[] args) throws IOException {
          ArrayList<ArrayList<String>> inputList = new ArrayList<ArrayList<String>>(); // Create a new ArrayList of ArrayLists to store the input
          ArrayList<ArrayList<String>> outputList = new ArrayList<ArrayList<String>>();
 
 
          try {
-             File inputFile = new File("C:\\Users\\johnh\\Desktop\\logic_test_cases\\easy1_CNF.txt"); // Create a new File object representing the input file
+             File inputFile = new File("C:\\Users\\John H\\Desktop\\logic_test_cases\\easy1_CNF.txt"); // Create a new File object representing the input file
 
              Scanner scanner = new Scanner(inputFile); // Create a new Scanner object for reading input from the input file
 
@@ -65,6 +71,7 @@ C:\\Users\\johnh\\Desktop\\logic_test_cases\\easy1_CNF.txt
          // Here's where the PL Resolution happens
          ArrayList<String> firstCompare = null;
          ArrayList<String> secondCompare = null;
+         ArrayList<String> temp = null;
          boolean cancelled = false;
 
          for(int i = 0; i < inputList.size(); i++){ // Getting first list
@@ -100,7 +107,17 @@ C:\\Users\\johnh\\Desktop\\logic_test_cases\\easy1_CNF.txt
                     }
 
                     if(cancelled){ // If there is a variable that is cancelled then we need to add a new list to our output.
+                        temp = new ArrayList<String>(firstCompare);
+                        temp.remove(k);
+                        if(!outputList.contains(temp)){
+                            outputList.add(temp);
+                        }
 
+                        if(!inputList.contains(temp)){
+                            inputList.add(temp);
+                        }
+                        
+                        cancelled = false;
                     }
 
                 }
@@ -114,17 +131,27 @@ C:\\Users\\johnh\\Desktop\\logic_test_cases\\easy1_CNF.txt
 
 
          }
+         
+         Collections.sort(outputList, new Comparator<ArrayList<String>>() {
+            public int compare(ArrayList<String> list1, ArrayList<String> list2) {
+                String str1 = String.join("", list1);
+                String str2 = String.join("", list2);
+                return str1.compareTo(str2);
+            }
+        });
 
 
 
-
-         // Print out the contents of the inputList ArrayList of ArrayLists
+         /*// Print out the contents of the inputList ArrayList of ArrayLists
          for (ArrayList<String> lineList : inputList) { // Loop through each ArrayList in the inputList ArrayList of ArrayLists
              for (String s : lineList) { // Loop through each String in the current ArrayList
                  System.out.print(s + " "); // Print the current String followed by a space
              }
              System.out.println(); // Print a newline character to separate the lines
          }
+         */
+
+
          for (ArrayList<String> lineList : outputList) { // Loop through each ArrayList in the inputList ArrayList of ArrayLists
             for (String s : lineList) { // Loop through each String in the current ArrayList
                 System.out.print(s + " "); // Print the current String followed by a space
@@ -132,7 +159,24 @@ C:\\Users\\johnh\\Desktop\\logic_test_cases\\easy1_CNF.txt
             System.out.println(); // Print a newline character to separate the lines
         }
 
-     }
+        String filePath = "output.txt";
+        File file = new File(filePath);
+        FileWriter writer = new FileWriter(file);
+
+
+        for (ArrayList<String> sublist : outputList) {
+            for (String str : sublist) {
+                writer.write(str + " ");
+            }
+            writer.write(System.lineSeparator());
+        }
+
+        // Close the FileWriter object
+        writer.close();
+
+
+     } // End of main
+     
 
  }
  
