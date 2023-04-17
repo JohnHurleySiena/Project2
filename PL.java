@@ -18,11 +18,11 @@ import java.io.IOException;
  public class PL {
      public static void main(String[] args) throws IOException {
          ArrayList<ArrayList<String>> inputList = new ArrayList<ArrayList<String>>(); // Create a new ArrayList of ArrayLists to store the input
-         ArrayList<ArrayList<String>> outputList = new ArrayList<ArrayList<String>>();
+         
 
 
          try {
-             File inputFile = new File("C:\\Users\\johnh\\Desktop\\logic_test_cases\\easy1_CNF.txt"); // Create a new File object representing the input file
+             File inputFile = new File("C:\\Users\\johnh\\Desktop\\logic_test_cases\\easy3_CNF.txt"); // Create a new File object representing the input file
 
              Scanner scanner = new Scanner(inputFile); // Create a new Scanner object for reading input from the input file
 
@@ -43,6 +43,7 @@ import java.io.IOException;
          }
 
 
+         ArrayList<ArrayList<String>> outputList = new ArrayList<ArrayList<String>>(inputList);
 
          // Here's where the PL Resolution happens
          // The firstCompare will point to one of the lines of variables
@@ -67,10 +68,11 @@ import java.io.IOException;
                     for(int o = 0; o < secondCompare.size();o++){ //  To loop through the variables in second list
 
                 // This if statement will check if the variable exists in the two lists to save computing power in large lists.
-                if(secondCompare.contains(firstCompare.get(k)) | secondCompare.contains("~" + firstCompare.get(k))){
+                //                                          if(secondCompare.contains(firstCompare.get(k)) | secondCompare.contains("~" + firstCompare.get(k))){
                     if(firstCompare.get(k).length() == 2){ // This will check if the variable is negated (2 characters indicates negated)
                         // This statement using substrings to check if there is a positive and a negative
-                        if(firstCompare.get(k).substring(1).equals(secondCompare.get(o)) & secondCompare.get(o).length() == 1 ){
+                        // firstCompare.get(k).substring(1).equals(secondCompare.get(o)) & secondCompare.get(o).length() == 1 
+                        if(firstCompare.get(k).equals("~" + secondCompare.get(o))){
                             cancelled = true; // Indicates whether or not we cancelled a variable.
                             
                         }
@@ -99,7 +101,7 @@ import java.io.IOException;
                         cancelled = false; // Reset cancelled variable
                     }
 
-                }
+                // Here lies our "time" save}
 
 
 
