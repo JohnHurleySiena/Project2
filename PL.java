@@ -22,7 +22,7 @@ import java.io.IOException;
 
 
          try {
-             File inputFile = new File("C:\\Users\\johnh\\Desktop\\logic_test_cases\\easy3_CNF.txt"); // Create a new File object representing the input file
+             File inputFile = new File("C:\\Users\\johnh\\Desktop\\logic_test_cases\\easy1_CNF.txt"); // Create a new File object representing the input file
 
              Scanner scanner = new Scanner(inputFile); // Create a new Scanner object for reading input from the input file
 
@@ -54,6 +54,7 @@ import java.io.IOException;
          ArrayList<String> firstCompare = null;
          ArrayList<String> secondCompare = null;
          ArrayList<String> temp = null;
+         ArrayList<String> temp2 = null;
          boolean cancelled = false;
          
 
@@ -73,6 +74,7 @@ import java.io.IOException;
                         // This statement using substrings to check if there is a positive and a negative
                         // firstCompare.get(k).substring(1).equals(secondCompare.get(o)) & secondCompare.get(o).length() == 1 
                         if(firstCompare.get(k).equals("~" + secondCompare.get(o))){
+                            System.out.println(firstCompare.toString() + " and " + secondCompare.toString() + " resolving " + firstCompare.get(k) + " + " + secondCompare.get(o));
                             cancelled = true; // Indicates whether or not we cancelled a variable.
                             
                         }
@@ -81,6 +83,7 @@ import java.io.IOException;
                     }else if(firstCompare.get(k).length() == 1){ // This will check if the variable is positive
                         // Adding negated symbol to check if it equals
                         if(("~" + firstCompare.get(k)).equals(secondCompare.get(o))){
+                            System.out.println(firstCompare.toString() + " and " + secondCompare.toString() + " resolving " + firstCompare.get(k) + " + " + secondCompare.get(o));
                             cancelled = true; // Indicates whether or not we cancelled a variable.
                             
                         }
@@ -90,6 +93,19 @@ import java.io.IOException;
                     if(cancelled){ // If there is a variable that is cancelled then we need to add a new list to our output.
                         temp = new ArrayList<String>(firstCompare); // Temporary to store and edit current list
                         temp.remove(k); // Removes the variable that needs to be cancelled.
+
+
+                        
+                        temp2 = new ArrayList<String>(secondCompare);
+                        temp2.remove(o);
+
+                        for(int p = 0; p < temp2.size(); p++){
+                            if(!temp.contains(temp2.get(p)))
+                            temp.add(temp2.get(p));
+                        }
+                        
+
+
                         if(!outputList.contains(temp)){ // If the outputList already contains the sentence then don't add
                             outputList.add(temp);
                         }
@@ -101,7 +117,7 @@ import java.io.IOException;
                         cancelled = false; // Reset cancelled variable
                     }
 
-                // Here lies our "time" save}
+        
 
 
 

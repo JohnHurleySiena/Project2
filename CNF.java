@@ -26,13 +26,12 @@ class PropositionalTree {
     public void insert(char data, Stack<Node> stack) {
         Node current = root;
         Node newNode = new Node(data);
+
+        while(!stack.empty()){
+            
+
+        }
         
-
-        
-
-        // Push the new node onto the stack
-        stack.push(newNode);
-
         // Increment the size of the tree
         size++;
     }
