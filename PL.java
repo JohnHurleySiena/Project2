@@ -103,6 +103,7 @@ import java.io.IOException;
                             if(!temp.contains(temp2.get(p)))
                             temp.add(temp2.get(p));
                         }
+                        temp.sort(null);
                         
 
 
