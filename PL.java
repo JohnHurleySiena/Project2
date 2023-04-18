@@ -121,7 +121,8 @@ import java.io.IOException;
             }
             }
          }
-         
+
+         System.out.println("\nOutput list:\n");
 
          // This block of code checks if the outputList is empty, if empty then print the input.
          if(outputList.size() == 0){
