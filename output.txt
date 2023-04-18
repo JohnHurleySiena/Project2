@@ -1,20 +1,6 @@
-a b c ~Z 
-a b d ~Z 
-a b ~Z 
-a c d ~Z 
-a c ~Z 
-a d ~Z 
-a ~Z 
-b c d ~Z 
-b c ~Z 
-b d ~Z 
-b ~Z 
-c d ~Z 
-c ~Z 
-d ~Z 
-~Z 
-~Z a b c d 
-~a 
-~b 
-~c 
-~d 
+a c 
+a c ~b 
+c 
+c ~a 
+c ~a ~b 
+c ~b 

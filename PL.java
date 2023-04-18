@@ -22,7 +22,7 @@ import java.io.IOException;
 
 
          try {
-             File inputFile = new File("C:\\Users\\johnh\\Desktop\\logic_test_cases\\easy1_CNF.txt"); // Create a new File object representing the input file
+             File inputFile = new File("Z:\\logic_test_cases\\medium2_CNF.txt"); // Create a new File object representing the input file
 
              Scanner scanner = new Scanner(inputFile); // Create a new Scanner object for reading input from the input file
 
@@ -103,7 +103,7 @@ import java.io.IOException;
                             if(!temp.contains(temp2.get(p)))
                             temp.add(temp2.get(p));
                         }
-                        temp.sort(null);
+                        //temp.sort(null);
                         
 
 
