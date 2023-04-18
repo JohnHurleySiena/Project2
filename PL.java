@@ -117,17 +117,9 @@ import java.io.IOException;
                         
                         cancelled = false; // Reset cancelled variable
                     }
-
-        
-
-
-
             }
             }
-
             }
-
-
          }
          
 

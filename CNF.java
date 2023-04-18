@@ -1,96 +1,62 @@
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.BufferedReader;
 import java.util.Stack;
 
 class Node {
-    char data;
-    Node left, right;
+    String data;
+    Node left;
+    Node right;
 
-    public Node(char data) {
+    public Node(String data) {
         this.data = data;
-        left = right = null;
+        this.left = null;
+        this.right = null;
     }
 }
 
-class PropositionalTree {
-    Node root;
-    int size;
+public class CNF {
+    public static Node parse(String sentence) {
+        Stack<Node> stack = new Stack<Node>();
 
-    public PropositionalTree() {
-        root = null;
-        size = 0;
-    }
+        for (int i = 0; i < sentence.length(); i++) {
+            char c = sentence.charAt(i);
 
-    public void insert(char data, Stack<Node> stack) {
-        Node current = root;
-        Node newNode = new Node(data);
-
-        while(!stack.empty()){
-            if(root == null){
-                root = stack.pop();
-            }else{
-                
-
-
-
+            if (Character.isLetter(c)) {
+                Node node = new Node(Character.toString(c));
+                stack.push(node);
+            } else if (c == '~') {
+                Node node = new Node(Character.toString(c));
+                node.right = stack.pop();
+                stack.push(node);
+            } else if (c == '>' || c == '|') {
+                Node node = new Node(Character.toString(c));
+                node.right = stack.pop();
+                node.left = stack.pop();
+                stack.push(node);
+            } else if (c == '&') {
+                Node node = new Node(Character.toString(c));
+                node.right = stack.pop();
+                node.left = stack.pop();
+                stack.push(node);
             }
-
-        }
-        
-        // Increment the size of the tree
-        size++;
-    }
-
-
-
-    public void readPropositionsFromFile() throws FileNotFoundException {
-        String file = "C:\\Users\\johnh\\Desktop\\list.txt";
-        
-        Stack<Character> charStack = new Stack<>();
-        
-
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String line = reader.readLine();
-            while (line != null) {
-                for (int i = 0; i < line.length(); i++) {
-
-                    // Need to check here if ( or ) or ' ' then we don't add to the stack
-                    char temp = line.charAt(i);
-                    if( temp != '(' & temp != ')' & temp != ' '){
-                    charStack.push(temp);
-                    }
-
-                }
-                line = reader.readLine();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
 
-        // Print the stack
-        System.out.println("Variables in the stack: " + charStack);
+        return stack.pop();
     }
 
-
-
-
-
-    public static void main(String[] args) {
-        PropositionalTree tree = new PropositionalTree();
-
-        try {
-            tree.readPropositionsFromFile();
-        } catch (FileNotFoundException e) {
-            System.out.println("File not found.");
+    public static void printTree(Node node, int level) {
+        if (node == null) {
             return;
         }
 
+        printTree(node.right, level + 1);
 
-        System.out.println("\nTotal number of nodes in propositional tree is: " + tree.size);
+        System.out.println(" ".repeat(level * 4) + node.data);
 
-        // (P biconditional Q) needs to be turned into ((P > Q) & (Q > P))
+        printTree(node.left, level + 1);
+    }
 
+    public static void main(String[] args) {
+        String sentence = "((~Z > (a | (b | (c | d)))) & (~a & (~b & (~c & ~d))))";
+        Node root = parse(sentence);
+        printTree(root, 0);
     }
 }
