@@ -28,7 +28,14 @@ class PropositionalTree {
         Node newNode = new Node(data);
 
         while(!stack.empty()){
-            
+            if(root == null){
+                root = stack.pop();
+            }else{
+                
+
+
+
+            }
 
         }
         
