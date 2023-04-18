@@ -1,8 +1,3 @@
-/*
-C:\\Users\\johnh\\Desktop\\logic_test_cases\\easy1_CNF.txt
-C:\\Users\\John H\\Desktop\\easy1_CNF.txt
- */
-
 import java.util.ArrayList; 
 import java.util.Collections;
 import java.util.Comparator;
@@ -14,7 +9,13 @@ import java.io.IOException;
  
 
 
-
+/**
+ * Takes input of a text file and uses PL Reduction to return a statement 
+ * of all possible combinations.
+ *
+ * @author John Hurley
+ * @version April 17th, 2023
+ */
  public class PL {
      public static void main(String[] args) throws IOException {
          ArrayList<ArrayList<String>> inputList = new ArrayList<ArrayList<String>>(); // Create a new ArrayList of ArrayLists to store the input
@@ -95,10 +96,12 @@ import java.io.IOException;
                         temp.remove(k); // Removes the variable that needs to be cancelled.
 
 
-                        
+                        // This is our temporary second list that removes the cancelled variable.
                         temp2 = new ArrayList<String>(secondCompare);
                         temp2.remove(o);
 
+                        // Here we are appending our second list in cases where the variables cancel out and
+                        // The sentence conjoins.
                         for(int p = 0; p < temp2.size(); p++){
                             if(!temp.contains(temp2.get(p)))
                             temp.add(temp2.get(p));
@@ -130,7 +133,7 @@ import java.io.IOException;
          }
          
 
-         // This block of code sorts the elements of outputList by  ASCII.
+         // This block of code sorts the elements of outputList by ASCII.
 
          Collections.sort(outputList, new Comparator<ArrayList<String>>() {
             public int compare(ArrayList<String> list1, ArrayList<String> list2) {
@@ -173,3 +176,5 @@ import java.io.IOException;
 
  }
  
+
+
